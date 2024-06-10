@@ -1,3 +1,9 @@
+:host ::ng-deep {
+  .p-button {
+    border-radius: 6px 0 0 6px;
+  }
+}
+
 .not-found {
   display: flex;
   align-items: center;
