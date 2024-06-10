@@ -1,0 +1,13 @@
+<header class="header">
+  <div class="container header__container">
+    <h1 class="h1">{{pageTitle}}</h1>
+    <ul class="navigation__list">
+      <li [routerLinkActive]="'navigation__link--active'">
+        <a routerLink="todo-list" class="navigation__link">Задание 1</a>
+      </li>
+      <li [routerLinkActive]="'navigation__link--active'">
+        <a routerLink="cities-list" class="navigation__link">Задание 2</a>
+      </li>
+    </ul>
+  </div>
+</header>

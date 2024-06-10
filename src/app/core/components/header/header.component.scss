@@ -1,0 +1,36 @@
+.header {
+  background-color: var(--color-light-grey);
+  height: 117px;
+  margin-bottom: 36px;
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+  }
+}
+
+.h1 {
+  font-size: 28px;
+}
+
+.navigation {
+  &__list {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  &__link {
+    color: var(--color-dark);
+
+    &:hover, &--active {
+      color: var(--color-dark);
+      text-decoration: underline;
+      text-underline-offset: 0.4rem;
+    }
+  }
+}

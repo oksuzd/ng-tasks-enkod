@@ -1,0 +1,15 @@
+.not-found {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding-block: 50px;
+
+  &__message {
+    width: 202px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
+    color: var(--color-dark-grey);
+  }
+}
