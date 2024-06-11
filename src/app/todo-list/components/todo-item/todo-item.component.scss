@@ -4,34 +4,38 @@
     width: 36px;
     height: 36px;
     padding: 0;
-    border-radius: 0 2px 2px 0;
-    //background-color: var(--red-600);
+    border-radius: 0 var(--border-radius-ml) var(--border-radius-ml) 0;
   }
 }
-
 
 .todo-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: 1px solid var(--color-border-grey);
-  border-radius: 2px;
 
-  &__checkbox-wrap {
+  &__checkbox-wrap, &__title-wrap {
     display: flex;
     align-items: center;
+    height: 36px;
+  }
+
+  &__checkbox-wrap {
     justify-content: center;
     width: 36px;
-    height: 36px;
     background-color: var(--color-light-grey);
-    border-right: 1px solid var(--color-border-grey);
+    border: 1px solid var(--color-border-grey);
+    border-radius: var(--border-radius-ml) 0 0 var(--border-radius-ml);
   }
 
   &__title-wrap {
     flex-grow: 1;
+    border-top: 1px solid var(--color-border-grey);
+    border-bottom: 1px solid var(--color-border-grey);
   }
 
   &__title-name {
     padding-inline: 12px;
+    font-size: 14px;
+    font-weight: 400;
   }
 }
