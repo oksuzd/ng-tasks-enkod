@@ -1,8 +1,15 @@
+import { guid } from '@datorama/akita';
+
 export interface Todo {
-  id: number;
-  name: string;
-  status: boolean;
+  id: string;
+  title: string;
+  completed: boolean;
 }
-export interface TodoFilter {
-  name: string;
+
+export function createTodo(title: string) {
+  return {
+    id: guid(),
+    title,
+    completed: false
+  } as Todo;
 }

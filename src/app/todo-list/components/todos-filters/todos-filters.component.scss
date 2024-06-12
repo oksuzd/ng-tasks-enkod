@@ -1,0 +1,22 @@
+:host ::ng-deep {
+  .p-dropdown {
+    width: 200px;
+  }
+
+  .p-dropdown-label {
+    font-size: 14px;
+  }
+}
+
+.filters {
+  &__wrap {
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+    margin-bottom: 32px;
+  }
+
+  &__label {
+    font-size: 14px;
+  }
+}

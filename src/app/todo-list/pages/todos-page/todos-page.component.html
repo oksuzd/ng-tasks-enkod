@@ -1,0 +1,45 @@
+<div class="container todos">
+  <div class="todos__body">
+    <h2 class="h2 visually-hidden">Заметки</h2>
+    <h3 class="h3 todos__title">Создать заметку</h3>
+    <form class="todos__form">
+      <div class="p-inputgroup">
+        <input
+            class="todos__create-input"
+            type="text"
+            name="name"
+            pInputText
+            placeholder="Название заметки"
+            [(ngModel)]="addInput"
+        />
+        <button
+            class="todos__create-button"
+            pButton
+            pRipple
+            (click)="add()">
+          <img
+              class="todos__create-icon"
+              src="../../../../assets/img/icons/telegram.svg"
+              alt=""
+              width="20" height="20" loading="lazy"
+          >
+        </button>
+      </div>
+    </form>
+    <h3 class="h3 todos__title">Список заметок</h3>
+    <app-todos-filters
+        (update)="changeFilter($event)"
+        [filters]="filters"
+        [active]="activeFilter">
+    </app-todos-filters>
+
+    <ng-container *ngIf="todos$ | async as todos">
+      <app-todos-list
+          [todos]="todos"
+          (delete)="delete($event)"
+          (complete)="complete($event)">
+      </app-todos-list>
+    </ng-container>
+
+  </div>
+</div>

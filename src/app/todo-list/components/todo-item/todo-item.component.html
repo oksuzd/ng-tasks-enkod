@@ -1,11 +1,11 @@
 <article class="todo-item">
   <div class="todo-item__checkbox-wrap">
-    <p-checkbox [(ngModel)]="todo.status" [binary]="true" inputId="binary"></p-checkbox>
+    <p-checkbox [formControl]="control" [binary]="true" inputId="binary"></p-checkbox>
   </div>
   <div class="todo-item__title-wrap">
-    <span class="todo-item__title-name">{{todo.name}}</span>
+    <span class="todo-item__title-name">{{todo.title}}</span>
   </div>
-  <button class="todo-item__delete-button" pButton pRipple severity="danger" (click)="deleteTodo()">
+  <button class="todo-item__delete-button" pButton pRipple severity="danger" (click)="delete.emit(todo.id)">
     <img
         class="todo-item__delete-icon"
         src="assets/img/icons/delete-cross.svg"

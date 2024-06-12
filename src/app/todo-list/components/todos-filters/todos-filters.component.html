@@ -1,0 +1,12 @@
+<div class="filters__wrap">
+  <span class="filters__label">Показывать</span>
+  <p-dropdown class="filters__select"
+              placeholder="Все заметки"
+              optionLabel="label"
+              optionValue="value"
+              [showClear]="true"
+              [options]="filters"
+              [(ngModel)]="selectedFilter"
+              (onChange)="onFilterChange()"
+  ></p-dropdown>
+</div>
