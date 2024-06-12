@@ -1,0 +1,111 @@
+:host {
+  .city-card {
+    transition: var(--transition-duration);
+
+    &:hover {
+      .city-card__footer {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
+    &__header {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      column-gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    &__footer {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity var(--transition-duration), visibility var(--transition-duration);
+    }
+
+    &__title {
+      font-size: 16px;
+    }
+
+    &__description {
+      color: var(--color-dark-grey);
+      font-size: 14px;
+    }
+
+    &__actions {
+      display: flex;
+    }
+  }
+}
+
+:host(.list) {
+  .city-card {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    column-gap: 28px;
+    width: 100%;
+    padding-block: 20px;
+    border-top: 1px solid var(--color-delimiter-grey);
+    border-bottom: 1px solid var(--color-light);
+
+    &:hover {
+      border-top: 1px solid var(--color-dark);
+      border-bottom: 1px solid var(--color-dark);
+    }
+
+    &__info {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    &__image {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      object-position: center;
+      border-radius: var(--border-radius-l);
+    }
+  }
+}
+
+:host(.grid) {
+  .city-card {
+    width: 320px;
+    aspect-ratio: 1;
+    background-color: var(--color-light-grey);
+    border-radius: var(--border-radius-l);
+
+    &:hover {
+      box-shadow: var(--shadow);
+    }
+
+    &__image {
+      width: 320px;
+      height: 188px;
+      margin-bottom: 16px;
+      border-radius: var(--border-radius-l) var(--border-radius-l) 0 0;
+    }
+
+    &__info {
+      padding-inline: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 108px;
+    }
+
+    &__header {
+      column-gap: 4px;
+    }
+
+    &__actions {
+      justify-content: flex-end;
+    }
+
+    &__favorite-button, &__delete-button, &__edit-button {
+      background-color: var(--color-light-grey);
+    }
+  }
+}

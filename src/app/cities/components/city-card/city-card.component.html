@@ -1,0 +1,62 @@
+<article class="city-card">
+  <img
+      class="city-card__image"
+      src="assets/img/cities/{{city.image}}"
+      alt="Фотография города {{city.name}}"
+      width="100" height="100" loading="lazy"
+  />
+  <div class="city-card__info">
+    <div class="city-card__wrapper">
+      <header class="city-card__header">
+        <h3 class="h3 city-card__title">{{city.name}}</h3>
+        <button class="city-card__favorite-button icon"
+                type="button"
+                title="Отметить, как любимый"
+                (click)="toggleFavorite()"
+        >
+          <span class="visually-hidden">Отметить, как любимый</span>
+          <img
+              class="city-card__favorite-icon"
+              [src]="city.favorite ? 'assets/img/icons/icon-favorite-checked.svg' : 'assets/img/icons/icon-favorite-unchecked.svg'"
+              alt=""
+              width="16" height="16" loading="lazy"
+          >
+        </button>
+      </header>
+      <div class="city-card__body">
+        <span class="city-card__description">{{city.description}}</span>
+      </div>
+    </div>
+    <div class="city-card__footer">
+      <div class="city-card__actions">
+        <button class="city-card__edit-button icon"
+                type="button"
+                title="Редактировать"
+                (click)="editCity()"
+        >
+          <span class="visually-hidden">Редактировать</span>
+          <img
+              class="city-card__edit-icon"
+              src="assets/img/icons/icon-edit.svg"
+              alt=""
+              width="16" height="16" loading="lazy"
+          >
+        </button>
+
+        <button class="city-card__delete-button icon"
+                type="button"
+                title="Удалить"
+                (click)="deleteCity()"
+        >
+          <span class="visually-hidden">Удалить</span>
+          <img
+              class="city-card__delete-icon"
+              src="assets/img/icons/icon-delete.svg"
+              alt=""
+              width="16" height="16" loading="lazy"
+          >
+        </button>
+      </div>
+    </div>
+  </div>
+</article>

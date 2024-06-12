@@ -1,0 +1,8 @@
+<div class="container cities-tile">
+  <h2 class="h2 visually-hidden">Города России, представленные в виде плиток</h2>
+  <ul class="cities-tile__list">
+    <li class="cities-tile__item" *ngFor="let city of cities$ | async">
+      <app-city-card class="grid" [city]="city"></app-city-card>
+    </li>
+  </ul>
+</div>

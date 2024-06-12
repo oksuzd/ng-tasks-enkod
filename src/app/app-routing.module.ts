@@ -9,12 +9,8 @@ const routes: Routes = [
     loadChildren: () => import('./todo-list/todos.module').then(m => m.TodosModule)
   },
   {
-    path: 'cities-list',
-    loadChildren: () => import('./cities-list/cities-list.module').then(m => m.CitiesListModule)
-  },
-  {
-    path: 'cities-tile',
-    loadChildren: () => import('./cities-tile/cities-tile.module').then(m => m.CitiesTileModule)
+    path: 'cities',
+    loadChildren: () => import('./cities/cities.module').then(m => m.CitiesModule)
   },
   {path: '**', component: NotFoundComponent},
 ];

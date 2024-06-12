@@ -22,10 +22,10 @@ export class HeaderComponent implements OnInit{
 
   updateTitle() {
     const currentRoute = this.router.url;
-    if (currentRoute.includes('cities-list')) {
-      this.pageTitle = 'Список городов';
-    } else if (currentRoute.includes('todo-list')) {
+    if (currentRoute.includes('todo-list')) {
       this.pageTitle = 'Список задач';
+    } else if (currentRoute.includes('cities')) {
+      this.pageTitle = 'Список городов';
     } else {
       this.pageTitle = 'Задания';
     }
