@@ -20,7 +20,6 @@ const primeNgModules = [
   ButtonDirective,
   Ripple,
   DropdownModule,
-  FormsModule,
   CheckboxModule
 ]
 
@@ -34,6 +33,7 @@ const primeNgModules = [
   imports: [
     CommonModule,
     TodosRoutingModule,
+    FormsModule,
     ReactiveFormsModule,
     [...primeNgModules]
   ]

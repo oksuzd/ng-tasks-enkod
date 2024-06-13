@@ -11,11 +11,10 @@ import { Router } from "@angular/router";
 export class ToolBarComponent {
   @Output() public newCity = new EventEmitter<City>();
 
-  view = 'list';
+  // view = 'list';
 
   constructor(
     private router: Router,
-    // public dialog: MatDialog,
   ) {}
 
   addCity(): void {

@@ -3,11 +3,13 @@ import { City } from "../../models/city.model";
 import { catchError, Subject, take, takeUntil, throwError } from "rxjs";
 import { CitiesDataService } from "../../services/cities-data.service";
 import { CitiesStoreService } from "../../services/cities-store.service";
+import { ConfirmationService } from "primeng/api";
 
 @Component({
   selector: 'app-city-card',
   templateUrl: './city-card.component.html',
   styleUrls: ['./city-card.component.scss'],
+  providers: [ConfirmationService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CityCardComponent implements OnDestroy {
@@ -18,7 +20,7 @@ export class CityCardComponent implements OnDestroy {
     private dataService: CitiesDataService,
     private dataStore: CitiesStoreService,
     private cdr: ChangeDetectorRef,
-    // public dialog: MatDialog,
+    private confirmationService: ConfirmationService,
   ) {
   }
 
@@ -43,44 +45,25 @@ export class CityCardComponent implements OnDestroy {
   }
 
 
+  deleteCity(): void {
+    this.confirmationService.confirm({
+      message: 'Вы уверены, что хотите удалить этот город?',
+      header: 'Удаление города',
+      acceptLabel: 'Да',
+      rejectLabel: 'Нет',
+      accept: () => {
+        this.dataService.deleteCity(this.city.id)
+          .pipe(
+            take(1),
+            takeUntil(this.notifier$),
+            catchError((err) => throwError(() => err))
+          )
+          .subscribe(() => this.dataStore.deleteCity(this.city.id));
+      }
+    });
+  }
+
   editCity() {
-    // const dialogRef: MatDialogRef<CityEditorComponent> = this.dialog.open(CityEditorComponent, {
-    //   data: this.city
-    // });
-    // dialogRef.afterClosed().subscribe(result => {
-    //   !!result && this.updateTask(result);
-    // });
-  }
 
-  deleteCity() {
-    // const dialogRef: MatDialogRef<DeleteConfirmationComponent> = this.dialog.open(DeleteConfirmationComponent,
-    //   {width: '250px'});
-    // dialogRef.afterClosed().subscribe(res => {
-    //   if (!!res) {
-    //     this.dataService.deleteCity(this.city.id)
-    //       .pipe(
-    //         take(1),
-    //         takeUntil(this.notifier$),
-    //         catchError((err) => throwError(() => err))
-    //       )
-    //       .subscribe(() => this.dataStore.deleteCity(this.city.id));
-    //   }
-    // });
-  }
-
-  private updateTask(city: City) {
-    this.dataService.updateCity(city)
-      .pipe(
-        take(1),
-        takeUntil(this.notifier$),
-        catchError((err) => throwError(() => err)))
-      .subscribe((result) => {
-          if (result) {
-            this.city = city;
-            this.dataStore.updateCity(this.city);
-            this.cdr.detectChanges();
-          }
-        }
-      );
   }
 }

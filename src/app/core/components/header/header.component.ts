@@ -7,8 +7,8 @@ import { filter } from "rxjs";
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit{
-  pageTitle: string = 'Задания';
+export class HeaderComponent implements OnInit {
+  pageTitle: string = '';
 
   constructor(private router: Router) {}
 
@@ -21,13 +21,22 @@ export class HeaderComponent implements OnInit{
   }
 
   updateTitle() {
+    const routeToTitleMap = {
+      'todo-list': 'Список задач',
+      'cities/list': 'Список городов',
+      'cities/tile': 'Список городов',
+      'cities/create': 'Создать город',
+      'cities/edit': 'Редактировать город'
+    };
+
     const currentRoute = this.router.url;
-    if (currentRoute.includes('todo-list')) {
-      this.pageTitle = 'Список задач';
-    } else if (currentRoute.includes('cities')) {
-      this.pageTitle = 'Список городов';
-    } else {
-      this.pageTitle = 'Задания';
+    this.pageTitle = 'Задания';
+
+    for (const [route, title] of Object.entries(routeToTitleMap)) {
+      if (currentRoute.includes(route)) {
+        this.pageTitle = title;
+        break;
+      }
     }
   }
 }
