@@ -9,60 +9,35 @@
     <div class="city-card__wrapper">
       <header class="city-card__header">
         <h3 class="h3 city-card__title">{{city.name}}</h3>
-        <button class="city-card__favorite-button icon"
-                type="button"
-                title="Отметить, как любимый"
-                (click)="toggleFavorite()"
-        >
-          <span class="visually-hidden">Отметить, как любимый</span>
-          <img
-              class="city-card__favorite-icon"
-              [src]="city.favorite ? 'assets/img/icons/icon-favorite-checked.svg' : 'assets/img/icons/icon-favorite-unchecked.svg'"
-              alt=""
-              width="16" height="16" loading="lazy"
-          >
-        </button>
+        <p-button
+            [icon]="city.favorite ? 'pi pi-star-fill' : 'pi pi-star'"
+            [rounded]="true"
+            [text]="true"
+            severity="secondary"
+            (click)="toggleFavorite()"
+        />
       </header>
       <div class="city-card__body">
         <span class="city-card__description">{{city.description}}</span>
       </div>
     </div>
-    <div class="city-card__footer">
+    <div class="city-card__actions-group">
       <div class="city-card__actions">
-
-<!--        <button class="button"-->
-<!--                (click)="navigate('cities/create')">-->
-<!--          Создать-->
-<!--        </button>-->
-
-        <button class="city-card__edit-button icon"
-                type="button"
-                title="Редактировать"
-                (click)="editCity()"
-        >
-          <span class="visually-hidden">Редактировать</span>
-          <img
-              class="city-card__edit-icon"
-              src="assets/img/icons/icon-edit.svg"
-              alt=""
-              width="16" height="16" loading="lazy"
-          >
-        </button>
-
+        <p-button
+            icon='pi pi-file-edit'
+            [rounded]="true"
+            [text]="true"
+            severity="secondary"
+            (click)="editCity()"
+        />
         <p-confirmDialog [style]="{width: '20vw'}"></p-confirmDialog>
-        <button class="city-card__delete-button icon"
-                type="button"
-                title="Удалить"
-                (click)="deleteCity()"
-        >
-          <span class="visually-hidden">Удалить</span>
-          <img
-              class="city-card__delete-icon"
-              src="assets/img/icons/icon-delete.svg"
-              alt=""
-              width="16" height="16" loading="lazy"
-          >
-        </button>
+        <p-button
+            icon='pi pi-trash'
+            [rounded]="true"
+            [text]="true"
+            severity="secondary"
+            (click)="deleteCity()"
+        />
       </div>
     </div>
   </div>

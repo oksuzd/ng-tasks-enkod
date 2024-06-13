@@ -15,6 +15,7 @@ import { Router } from "@angular/router";
 })
 export class CityCardComponent implements OnDestroy {
   @Input() public city!: City;
+  // isFavoriteIcon: boolean = false;
   private notifier$: Subject<null> = new Subject();
 
   constructor(
@@ -33,6 +34,7 @@ export class CityCardComponent implements OnDestroy {
   toggleFavorite() {
     const previousFavorite = this.city.favorite;
     this.city.favorite = !this.city.favorite;
+    // this.isFavoriteIcon = this.city.favorite;
     this.dataService.updateCity(this.city)
       .pipe(
         take(1),

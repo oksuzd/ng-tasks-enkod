@@ -1,3 +1,9 @@
+:host ::ng-deep {
+  .p-menuitem-link {
+    background-color: var(--color-light-grey);
+  }
+}
+
 .header {
   background-color: var(--color-light-grey);
   height: 117px;
@@ -14,22 +20,22 @@
   font-size: 28px;
 }
 
-.navigation {
-  &__list {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-
-  &__link {
-    color: var(--color-dark);
-
-    &:hover, &--active {
-      color: var(--color-dark);
-      text-decoration: underline;
-      text-underline-offset: 0.4rem;
-    }
-  }
-}
+//.navigation {
+//  &__list {
+//    list-style: none;
+//    display: flex;
+//    justify-content: center;
+//    gap: 20px;
+//    flex-wrap: wrap;
+//  }
+//
+//  &__link {
+//    color: var(--color-dark);
+//
+//    &:hover, &--active {
+//      color: var(--color-dark);
+//      text-decoration: underline;
+//      text-underline-offset: 0.4rem;
+//    }
+//  }
+//}

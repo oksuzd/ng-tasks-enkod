@@ -10,27 +10,15 @@ import { Router } from "@angular/router";
 })
 export class ToolBarComponent {
   @Output() public newCity = new EventEmitter<City>();
-
-  // view = 'list';
+  // activeButton: string | undefined = 'list';
 
   constructor(
     private router: Router,
   ) {}
 
-  addCity(): void {
-    // const dialogRef: MatDialogRef<CityEditorComponent> = this.dialog.open(CityEditorComponent,
-    //   {
-    //     data: {id: ''}
-    //   });
-    // dialogRef.afterClosed().subscribe(result => {
-    //   if (result) {
-    //     this.newCity.emit(result);
-    //   }
-    // });
-  }
-
   navigate(view: string) {
-    this.router.navigate([view]).then();
+    this.router.navigate([view]).then(() => {
+      // this.activeButton = view.split('/').pop();
+    });
   }
-
 }

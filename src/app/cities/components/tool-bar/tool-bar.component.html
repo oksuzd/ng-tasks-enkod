@@ -1,16 +1,24 @@
 <div class="container tool-bar">
-  <div class="tool-bar__toggles-group">
-    <button class="button button__toggle button__toggle--left button__toggle--active"
-            (click)="navigate('cities/list')">
-      Список
-    </button>
-    <button class="button button__toggle button__toggle--right"
-            (click)="navigate('cities/tile')">
-      Плитка
-    </button>
-  </div>
-  <button class="button"
-          (click)="navigate('cities/create')">
-    Создать
-  </button>
+    <span class="p-buttonset">
+      <button class="tool-bar__toggle-button"
+              pButton
+              pRipple
+              label="Список"
+              severity="secondary"
+              [outlined]="true"
+              (click)="navigate('cities/list')"
+      ></button>
+      <button class="tool-bar__toggle-button"
+          pButton
+          pRipple
+          label="Плитка"
+          severity="secondary"
+          [outlined]="true"
+          (click)="navigate('cities/tile')"
+      ></button>
+    </span>
+  <p-button
+      label="Создать"
+      (click)="navigate('cities/create')"
+  ></p-button>
 </div>
