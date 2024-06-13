@@ -13,10 +13,13 @@ import { Button, ButtonDirective } from "primeng/button";
 import { Ripple } from "primeng/ripple";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ConfirmDialogModule } from "primeng/confirmdialog";
+import { SharedModule } from "../shared/shared.module";
+import { InputTextareaModule } from "primeng/inputtextarea";
 
 
 const primeNgModules = [
   InputTextModule,
+  InputTextareaModule,
   Button,
   ButtonDirective,
   Ripple,
@@ -37,7 +40,9 @@ const primeNgModules = [
     CitiesRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModule,
     [...primeNgModules],
+    SharedModule,
   ]
 })
 export class CitiesModule { }

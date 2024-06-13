@@ -1,47 +1,50 @@
 <div class="container city-editor">
+<div class="city-editor__body">
+  <app-back-button class="city-editor__back-button"></app-back-button>
+  <form [formGroup]="cityForm" class="city-editor__form">
+    <div class="city-editor__form-wrap">
+      <div class="field">
+        <label class="field__label" for="city-name">Название города</label>
+        <input
+            class="field__input"
+            id="city-name"
+            pInputText
+            formControlName="name"
+        />
+      </div>
 
+      <div class="field">
+        <label class="field__label" for="city-description">Краткое описание</label>
+        <textarea
+            class="field__input add-city__textarea"
+            id="city-description"
+            name="description"
+            rows="5"
+            cols="30"
+            pInputTextarea
+            formControlName="description"
+        >
+        </textarea>
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="image-link">Ссылка на картинку</label>
+        <input
+            class="field__input"
+            id="image-link"
+            pInputText
+            formControlName="image"
+        />
+      </div>
+    </div>
+
+    <p-button
+        class="city-editor__button button"
+        label="Сохранить"
+        type="submit"
+        [disabled]="cityForm.invalid"
+        (click)="submitForm()"
+    ></p-button>
+  </form>
 </div>
-
-
-
-
-<!--<div class="add-city">-->
-<!--  <h2 class="add-city__title">{{titleName}}</h2>-->
-<!--  <div class="add-city__body">-->
-<!--    <form [formGroup]="cityForm" class="add-city__form">-->
-<!--      <div class="field">-->
-<!--        <label class="field__label" for="city-name">Название города*</label>-->
-<!--        <input-->
-<!--            class="field__input"-->
-<!--            id="city-name"-->
-<!--            name="name"-->
-<!--            type="text"-->
-<!--            formControlName="name"-->
-<!--        />-->
-<!--      </div>-->
-
-<!--      <div class="field">-->
-<!--        <label class="field__label" for="city-description">Краткое описание*</label>-->
-<!--        <textarea-->
-<!--            class="field__input add-city__textarea"-->
-<!--            id="city-description"-->
-<!--            name="description"-->
-<!--            formControlName="description"-->
-<!--        >-->
-<!--        </textarea>-->
-
-<!--      </div>-->
-
-<!--      <div class="add-city__buttons-group">-->
-<!--        <button-->
-<!--            class="add-city__button button"-->
-<!--            type="submit"-->
-<!--            [disabled]="cityForm.invalid"-->
-<!--        >-->
-<!--          Сохранить-->
-<!--        </button>-->
-<!--      </div>-->
-<!--    </form>-->
-<!--  </div>-->
-<!--</div>-->
-
+</div>

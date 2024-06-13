@@ -3,10 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { HeaderComponent } from './components/header/header.component';
 import { RouterLink, RouterLinkActive } from "@angular/router";
-import { ButtonModule } from "primeng/button";
-import { InputTextModule } from "primeng/inputtext";
-import { DropdownModule } from "primeng/dropdown";
-
+import { SharedModule } from "../shared/shared.module";
 
 
 @NgModule({
@@ -15,15 +12,13 @@ import { DropdownModule } from "primeng/dropdown";
     HeaderComponent
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
   ],
   imports: [
     CommonModule,
     RouterLink,
     RouterLinkActive,
-    ButtonModule,
-    InputTextModule,
-    DropdownModule
+    SharedModule,
   ]
 })
-export class CoreModule { }
+export class CoreModule {}

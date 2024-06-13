@@ -7,20 +7,21 @@ import { CityEditorComponent } from "./pages/city-editor/city-editor.component";
 
 
 const routes: Routes = [
+  {path: 'create', component: CityEditorComponent},
+  {path: 'edit/:id', component: CityEditorComponent},
   {
     path: '',
     component: CitiesPageComponent,
     children: [
-      { path: 'list', component: CitiesListComponent },
-      { path: 'tile', component: CitiesTileComponent },
-      { path: 'create', component: CityEditorComponent },
-      { path: '', redirectTo: 'list', pathMatch: 'full' },
+      {path: 'list', component: CitiesListComponent},
+      {path: 'tile', component: CitiesTileComponent},
+      {path: '', redirectTo: 'list', pathMatch: 'full'},
     ],
   },
-]
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class CitiesRoutingModule { }
+export class CitiesRoutingModule {}

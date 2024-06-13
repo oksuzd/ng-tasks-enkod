@@ -18,6 +18,11 @@ export class CitiesStoreService {
     return this._cities$.getValue();
   }
 
+  getCityById(id: number): City | undefined {
+    const cities: City[] = this.getCitiesFromStore();
+    return cities.find(city => city.id === id);
+  }
+
   addCity(newCity: City) {
     const cities: City[] = this.getCitiesFromStore();
     const cityExists = cities.some(city => city.id === newCity.id);

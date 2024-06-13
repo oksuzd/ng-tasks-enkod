@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy } from '@angular/core';
 import { City } from "../../models/city.model";
 import { catchError, Subject, take, takeUntil, throwError } from "rxjs";
 import { CitiesDataService } from "../../services/cities-data.service";
 import { CitiesStoreService } from "../../services/cities-store.service";
 import { ConfirmationService } from "primeng/api";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-city-card',
@@ -19,8 +20,8 @@ export class CityCardComponent implements OnDestroy {
   constructor(
     private dataService: CitiesDataService,
     private dataStore: CitiesStoreService,
-    private cdr: ChangeDetectorRef,
     private confirmationService: ConfirmationService,
+    private router: Router,
   ) {
   }
 
@@ -63,7 +64,8 @@ export class CityCardComponent implements OnDestroy {
     });
   }
 
-  editCity() {
 
+  editCity() {
+    this.router.navigate([`cities/edit/${this.city.id}`]).then();
   }
 }
