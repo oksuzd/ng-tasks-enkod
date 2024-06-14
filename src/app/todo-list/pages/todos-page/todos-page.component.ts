@@ -1,23 +1,24 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { catchError, Observable, Subject, take, takeUntil, throwError } from "rxjs";
+import { Component, OnInit } from '@angular/core';
+import { Observable } from "rxjs";
 import { Todo } from "../../models/todo.model";
 import { initialFilters, TodoFilter, VISIBILITY_FILTER } from "../../models/filter.model";
 import { TodosQuery } from "../../state/todos.query";
 import { TodosService } from "../../state/todos.service";
+import { UntilDestroy } from '@ngneat/until-destroy';
 
 
+@UntilDestroy({checkProperties: true})
 @Component({
   selector: 'app-todo-list',
   templateUrl: './todos-page.component.html',
   styleUrls: ['./todos-page.component.scss']
 })
-export class TodosPageComponent implements OnInit, OnDestroy {
+export class TodosPageComponent implements OnInit {
 
   addInput = '';
   todos$!: Observable<Todo[] | null>;
   activeFilter: VISIBILITY_FILTER = VISIBILITY_FILTER.SHOW_ALL;
   filters: TodoFilter[] = initialFilters;
-  private notifier$: Subject<null> = new Subject();
 
   constructor(
     private todosQuery: TodosQuery,
@@ -30,19 +31,8 @@ export class TodosPageComponent implements OnInit, OnDestroy {
     this.createSubscription();
   }
 
-  ngOnDestroy() {
-    this.notifier$.next(null);
-    this.notifier$.complete();
-  }
-
   createSubscription() {
-    this.todosQuery.selectVisibilityFilter$
-      .pipe(
-        take(1),
-        takeUntil(this.notifier$),
-        catchError((err) => throwError(() => err))
-      )
-      .subscribe(val => this.activeFilter = val);
+    this.todosQuery.selectVisibilityFilter$.subscribe(val => this.activeFilter = val);
   }
 
 

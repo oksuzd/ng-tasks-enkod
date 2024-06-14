@@ -2,7 +2,9 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@
 import { NavigationEnd, Router } from "@angular/router";
 import { filter } from "rxjs";
 import { MenuItem } from "primeng/api";
+import { UntilDestroy} from '@ngneat/until-destroy';
 
+@UntilDestroy({ checkProperties: true })
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',

@@ -1,21 +1,21 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { City } from "../../models/city.model";
 import { ActivatedRoute } from "@angular/router";
-import { catchError, Subject, take, takeUntil, throwError } from "rxjs";
 import { Location } from "@angular/common";
 import { CitiesService } from "../../state/cities.service";
+import { UntilDestroy} from '@ngneat/until-destroy';
 
+@UntilDestroy({ checkProperties: true })
 @Component({
   selector: 'app-city-editor',
   templateUrl: './city-editor.component.html',
   styleUrls: ['./city-editor.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CityEditorComponent implements OnInit, OnDestroy {
+export class CityEditorComponent implements OnInit {
 
   data: Partial<City> = {};
-  private notifier$ = new Subject<void>();
 
   cityForm: FormGroup = this.fb.group({
     id: [''],
@@ -45,11 +45,6 @@ export class CityEditorComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy() {
-    this.notifier$.next();
-    this.notifier$.complete();
-  }
-
   submitForm() {
     if (this.cityForm.valid) {
       if (this.data.id) {
@@ -62,21 +57,10 @@ export class CityEditorComponent implements OnInit, OnDestroy {
   }
 
   private createCity() {
-    this.citiesService.addCity(this.cityForm.value)
-      .pipe(
-        take(1),
-        takeUntil(this.notifier$),
-        catchError((err) => throwError(() => err))
-      )
-      .subscribe();
+    this.citiesService.addCity(this.cityForm.value).subscribe();
   }
 
   private editCity() {
-    this.citiesService.updateCity(this.cityForm.value)
-      .pipe(
-        takeUntil(this.notifier$),
-        catchError((err) => throwError(() => err))
-      )
-      .subscribe();
+    this.citiesService.updateCity(this.cityForm.value).subscribe();
   }
 }

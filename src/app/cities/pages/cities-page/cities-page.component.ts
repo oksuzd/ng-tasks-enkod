@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { catchError, Subject, take, takeUntil, throwError } from "rxjs";
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { City } from "../../models/city.model";
 import { CitiesService } from "../../state/cities.service";
+import { UntilDestroy} from '@ngneat/until-destroy';
 
+@UntilDestroy({ checkProperties: true })
 @Component({
   selector: 'app-cities-page',
   templateUrl: './cities-page.component.html',
@@ -10,8 +11,7 @@ import { CitiesService } from "../../state/cities.service";
   changeDetection: ChangeDetectionStrategy.OnPush
 
 })
-export class CitiesPageComponent implements OnInit, OnDestroy {
-  private notifier$ = new Subject<void>();
+export class CitiesPageComponent implements OnInit {
 
   constructor(
     private citiesService: CitiesService,
@@ -21,31 +21,15 @@ export class CitiesPageComponent implements OnInit, OnDestroy {
     this.loadCities();
   }
 
-  ngOnDestroy() {
-    this.notifier$.next();
-    this.notifier$.complete();
-  }
-
   onDataReceived(data: City) {
     this.createNewCity(data);
   }
 
   private createNewCity(city: City) {
-    this.citiesService.addCity(city)
-      .pipe(
-        takeUntil(this.notifier$),
-        catchError((err) => throwError(() => err))
-      )
-      .subscribe();
+    this.citiesService.addCity(city).subscribe();
   }
 
   private loadCities() {
-    this.citiesService.getCities()
-      .pipe(
-        take(1),
-        takeUntil(this.notifier$),
-        catchError((err) => throwError(() => err))
-      )
-      .subscribe();
+    this.citiesService.getCities().subscribe();
   }
 }
