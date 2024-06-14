@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable } from "rxjs";
 import { City } from "../../models/city.model";
-import { CitiesStoreService } from "../../services/cities-store.service";
+import { CitiesQuery } from "../../state/cities.query";
 
 @Component({
   selector: 'app-cities-tile',
@@ -12,9 +12,9 @@ import { CitiesStoreService } from "../../services/cities-store.service";
 export class CitiesTileComponent implements OnInit {
   cities$: Observable<City[]> | undefined;
 
-  constructor(private dataStore: CitiesStoreService) {}
+  constructor(private citiesQuery: CitiesQuery) {}
 
   ngOnInit() {
-    this.cities$ = this.dataStore.cities$;
+    this.cities$ = this.citiesQuery.selectAll();
   }
 }

@@ -2,10 +2,9 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnIni
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { City } from "../../models/city.model";
 import { ActivatedRoute } from "@angular/router";
-import { CitiesDataService } from "../../services/cities-data.service";
-import { CitiesStoreService } from "../../services/cities-store.service";
 import { catchError, Subject, take, takeUntil, throwError } from "rxjs";
 import { Location } from "@angular/common";
+import { CitiesService } from "../../state/cities.service";
 
 @Component({
   selector: 'app-city-editor',
@@ -16,7 +15,7 @@ import { Location } from "@angular/common";
 export class CityEditorComponent implements OnInit, OnDestroy {
 
   data: Partial<City> = {};
-  private notifier$: Subject<null> = new Subject();
+  private notifier$ = new Subject<void>();
 
   cityForm: FormGroup = this.fb.group({
     id: [''],
@@ -24,41 +23,30 @@ export class CityEditorComponent implements OnInit, OnDestroy {
     description: ['',
       [Validators.required, Validators.minLength(3), Validators.maxLength(70)]],
     image: [''],
+    favorite: [false]
   });
 
   constructor(
     private fb: FormBuilder,
     public route: ActivatedRoute,
-    private dataService: CitiesDataService,
-    private dataStore: CitiesStoreService,
+    private citiesService: CitiesService,
     private cdr: ChangeDetectorRef,
     private location: Location
   ) {
   }
 
   ngOnInit() {
-    const itemId = Number(this.route.snapshot.params['id']);
+    const itemId = this.route.snapshot.params['id'];
     if (itemId) {
-      this.dataService.getCityById(itemId)
-        .pipe()
-        .subscribe((res) => {
-          if (res) {
-            this.data = res;
-            this.cityForm.patchValue({
-              id: res.id,
-              name: res.name,
-              description: res.description,
-              image: res.image
-            });
-            this.cdr.detectChanges();
-          }
-        });
-
+      this.data = this.citiesService.getCityById(itemId)!;
+      const { id, name, description, image, favorite } = this.data;
+      this.cityForm.patchValue({ id, name, description, image, favorite });
+      this.cdr.detectChanges();
     }
   }
 
   ngOnDestroy() {
-    this.notifier$.next(null);
+    this.notifier$.next();
     this.notifier$.complete();
   }
 
@@ -74,22 +62,21 @@ export class CityEditorComponent implements OnInit, OnDestroy {
   }
 
   private createCity() {
-    this.dataService.addCity(this.cityForm.value)
+    this.citiesService.addCity(this.cityForm.value)
       .pipe(
         take(1),
         takeUntil(this.notifier$),
         catchError((err) => throwError(() => err))
       )
-      .subscribe((res: City) => this.dataStore.addCity(res));
+      .subscribe();
   }
 
   private editCity() {
-    this.dataService.updateCity(this.data.id!, this.cityForm.value)
+    this.citiesService.updateCity(this.cityForm.value)
       .pipe(
-        take(1),
         takeUntil(this.notifier$),
         catchError((err) => throwError(() => err))
       )
-      .subscribe(() => this.dataStore.updateCity(this.cityForm.value));
+      .subscribe();
   }
 }

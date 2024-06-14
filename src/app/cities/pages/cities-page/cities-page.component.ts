@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { catchError, Subject, take, takeUntil, throwError } from "rxjs";
 import { City } from "../../models/city.model";
-import { CitiesDataService } from "../../services/cities-data.service";
-import { CitiesStoreService } from "../../services/cities-store.service";
+import { CitiesService } from "../../state/cities.service";
 
 @Component({
   selector: 'app-cities-page',
@@ -12,19 +11,18 @@ import { CitiesStoreService } from "../../services/cities-store.service";
 
 })
 export class CitiesPageComponent implements OnInit, OnDestroy {
-  private notifier$: Subject<null> = new Subject();
+  private notifier$ = new Subject<void>();
 
   constructor(
-    private dataService: CitiesDataService,
-    private dataStore: CitiesStoreService,
+    private citiesService: CitiesService,
   ) {}
 
   ngOnInit() {
-    this.createSubscription();
+    this.loadCities();
   }
 
   ngOnDestroy() {
-    this.notifier$.next(null);
+    this.notifier$.next();
     this.notifier$.complete();
   }
 
@@ -33,24 +31,21 @@ export class CitiesPageComponent implements OnInit, OnDestroy {
   }
 
   private createNewCity(city: City) {
-    this.dataService.addCity(city)
+    this.citiesService.addCity(city)
       .pipe(
-        take(1),
         takeUntil(this.notifier$),
         catchError((err) => throwError(() => err))
       )
-      .subscribe((result: City) => this.dataStore.addCity(result));
+      .subscribe();
   }
 
-  private createSubscription() {
-    this.dataService.getCities()
+  private loadCities() {
+    this.citiesService.getCities()
       .pipe(
         take(1),
         takeUntil(this.notifier$),
         catchError((err) => throwError(() => err))
       )
-      .subscribe((data) => {
-        this.dataStore.setCitiesToStore(data);
-      });
+      .subscribe();
   }
 }
