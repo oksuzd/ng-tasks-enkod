@@ -1,7 +1,9 @@
+export type ID = string | number;
+
 export interface City {
-  id: number;
-  image: string;
+  id: ID;
   name: string;
   description: string;
+  image: string;
   favorite: boolean;
 }

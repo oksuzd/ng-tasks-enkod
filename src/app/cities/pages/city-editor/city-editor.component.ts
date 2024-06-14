@@ -39,17 +39,21 @@ export class CityEditorComponent implements OnInit, OnDestroy {
   ngOnInit() {
     const itemId = Number(this.route.snapshot.params['id']);
     if (itemId) {
-      const city = this.dataStore.getCityById(itemId);
-      if (city) {
-        this.data = city;
-        this.cityForm.patchValue({
-          id: city.id,
-          name: city.name,
-          description: city.description,
-          image: city.image
+      this.dataService.getCityById(itemId)
+        .pipe()
+        .subscribe((res) => {
+          if (res) {
+            this.data = res;
+            this.cityForm.patchValue({
+              id: res.id,
+              name: res.name,
+              description: res.description,
+              image: res.image
+            });
+            this.cdr.detectChanges();
+          }
         });
-        this.cdr.detectChanges();
-      }
+
     }
   }
 
@@ -70,7 +74,7 @@ export class CityEditorComponent implements OnInit, OnDestroy {
   }
 
   private createCity() {
-    this.dataService.createCity(this.cityForm.value)
+    this.dataService.addCity(this.cityForm.value)
       .pipe(
         take(1),
         takeUntil(this.notifier$),
@@ -80,7 +84,7 @@ export class CityEditorComponent implements OnInit, OnDestroy {
   }
 
   private editCity() {
-    this.dataService.updateCity(this.cityForm.value)
+    this.dataService.updateCity(this.data.id!, this.cityForm.value)
       .pipe(
         take(1),
         takeUntil(this.notifier$),
@@ -88,5 +92,4 @@ export class CityEditorComponent implements OnInit, OnDestroy {
       )
       .subscribe(() => this.dataStore.updateCity(this.cityForm.value));
   }
-
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { City } from "../models/city.model";
 import { BehaviorSubject, Observable, throwError } from "rxjs";
+import { ID } from "@datorama/akita";
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class CitiesStoreService {
   }
 
   getCitiesFromStore(): City[] {
+    console.log('CitiesList', this._cities$.getValue());
     return this._cities$.getValue();
   }
 
@@ -45,7 +47,7 @@ export class CitiesStoreService {
     }
   }
 
-  deleteCity(id: number) {
+  deleteCity(id: ID) {
     let cities: City[] = this.getCitiesFromStore();
     const initialLength: number = cities.length;
     cities = cities.filter(city => city.id !== id);

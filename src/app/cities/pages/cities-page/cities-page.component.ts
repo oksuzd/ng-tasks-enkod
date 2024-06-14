@@ -33,7 +33,7 @@ export class CitiesPageComponent implements OnInit, OnDestroy {
   }
 
   private createNewCity(city: City) {
-    this.dataService.createCity(city)
+    this.dataService.addCity(city)
       .pipe(
         take(1),
         takeUntil(this.notifier$),

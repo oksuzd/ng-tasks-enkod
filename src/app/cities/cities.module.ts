@@ -42,7 +42,6 @@ const primeNgModules = [
     ReactiveFormsModule,
     SharedModule,
     [...primeNgModules],
-    SharedModule,
   ]
 })
 export class CitiesModule { }
