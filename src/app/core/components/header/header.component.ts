@@ -25,7 +25,8 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.items = [
       {label: 'Задание 1', routerLink: 'todo-list'},
-      {label: 'Задание 2', routerLink: 'cities'}
+      {label: 'Задание 2', routerLink: 'cities'},
+      {label: 'Задание 3', routerLink: 'basic-forms'}
     ];
 
     this.router.events
@@ -44,7 +45,9 @@ export class HeaderComponent implements OnInit {
       'cities/list': 'Список городов',
       'cities/tile': 'Список городов',
       'cities/create': 'Создать город',
-      'cities/edit': 'Редактировать город'
+      'cities/edit': 'Редактировать город',
+      'basic-forms': 'Создание пользователя',
+
     };
 
     const currentRoute = this.router.url;

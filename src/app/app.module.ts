@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from "./core/core.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HttpClientModule } from "@angular/common/http";
-
+import { TuiRootModule } from "@taiga-ui/core";
 
 @NgModule({
   declarations: [
@@ -18,8 +18,9 @@ import { HttpClientModule } from "@angular/common/http";
     AppRoutingModule,
     CoreModule,
     HttpClientModule,
+    TuiRootModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

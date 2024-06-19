@@ -12,6 +12,10 @@ const routes: Routes = [
     path: 'cities',
     loadChildren: () => import('./cities/cities.module').then(m => m.CitiesModule)
   },
+  {
+    path: 'basic-forms',
+    loadChildren: () => import('./basic-forms/basic-forms.module').then(m => m.BasicFormsModule)
+  },
   {path: '**', component: NotFoundComponent},
 ];
 

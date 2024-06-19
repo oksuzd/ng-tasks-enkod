@@ -1,0 +1,12 @@
+<div [formGroup]="skillsForm">
+  <button tuiButton (click)="addSkill()" [disabled]="skills.length >= 3">Добавить умение</button>
+  <p *ngIf="skills.length > 3" class="error">Желательно не больше 3х умений</p>
+  <div formArrayName="skills">
+    <app-skill-item
+        *ngFor="let skill of skills.controls; let i = index"
+        [skillForm]="skill"
+        (remove)="removeSkill(i)">
+    </app-skill-item>
+  </div>
+  <button tuiButton (click)="createSkills()" [disabled]="skills.length === 0">Создать</button>
+</div>

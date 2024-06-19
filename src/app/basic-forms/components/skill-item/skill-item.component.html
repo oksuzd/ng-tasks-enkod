@@ -1,0 +1,7 @@
+<form [formGroup]="skillForm" class="skill__form">
+  <tui-input formControlName="name" class="skill__input">
+    Введите название
+    <input tuiTextfield type="text" />
+  </tui-input>
+  <button appearance="icon" icon="tuiIconTrash" tuiIconButton type="button" (click)="removeSkill()"></button>
+</form>

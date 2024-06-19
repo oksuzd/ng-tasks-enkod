@@ -1,0 +1,9 @@
+.skill {
+  &__form {
+    display: flex;
+  }
+
+  &__input {
+    flex-grow: 1;
+  }
+}
