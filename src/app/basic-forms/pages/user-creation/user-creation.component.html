@@ -6,34 +6,34 @@
           <h3 class="tui-form__header visually-hidden">Создание пользователя</h3>
           <div class="tui-form__row">
             <tui-input
-                formControlName="firstNameValue"
+                formControlName="name"
             >
               Введите имя
               <input
-                  placeholder="John"
+                  placeholder="Иван"
                   tuiTextfield
               />
               <span class="tui-required"></span>
             </tui-input>
             <tui-error
-                formControlName="firstNameValue"
+                formControlName="name"
                 [error]="[] | tuiFieldError | async"
             ></tui-error>
           </div>
 
           <div class="tui-form__row">
             <tui-input
-                formControlName="lastNameValue"
+                formControlName="surname"
             >
               Введите фамилию
               <input
-                  placeholder="Doe"
+                  placeholder="Иванов"
                   tuiTextfield
               />
               <span class="tui-required"></span>
             </tui-input>
             <tui-error
-                formControlName="lastNameValue"
+                formControlName="surname"
                 [error]="[] | tuiFieldError | async"
             ></tui-error>
           </div>
@@ -41,13 +41,13 @@
           <div class="tui-form__row tui-form__row_multi-fields">
             <div class="tui-form__multi-field">
               <tui-select
-                  formControlName="languageValue"
+                  formControlName="lang"
                   [valueContent]="languageValueContent"
               >
                 Выберите язык интерфейса
                 <tui-data-list-wrapper
                     *tuiDataList
-                    [items]="languages"
+                    [items]="getLanguages(languages)"
                 ></tui-data-list-wrapper>
               </tui-select>
               <ng-template
@@ -57,7 +57,7 @@
                 <div>{{ data }}</div>
               </ng-template>
               <tui-error
-                  formControlName="languageValue"
+                  formControlName="lang"
                   [error]="[] | tuiFieldError | async"
               ></tui-error>
             </div>
@@ -70,14 +70,14 @@
               [collapsed]="true"
           >
             <tui-radio-block
-                *ngFor="let user of users"
+                *ngFor="let role of roles"
                 contentAlign="right"
-                formControlName="radioValue"
+                formControlName="role"
                 size="l"
                 [hideRadio]="true"
-                [item]="user"
+                [item]="role.ru"
             >
-              {{ user }}
+              {{ role.ru }}
             </tui-radio-block>
           </div>
 
@@ -92,7 +92,10 @@
             </button>
           </div>
 
-          <ul formArrayName="skills"
+          <tui-error [error]="numberOfSkillsError"></tui-error>
+
+          <ul *ngIf="skills.length"
+              formArrayName="skills"
               class="tui-form__row user-creation__skills-list"
           >
             <li *ngFor="let skill of skills.controls; let i = index"
@@ -110,7 +113,7 @@
                 tuiButton
                 type="submit"
                 (click)="createUser()"
-                [disabled]="skills.length === 0"
+                [disabled]="userForm.invalid"
             >
               Создать
             </button>

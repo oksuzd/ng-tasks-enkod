@@ -1,12 +1,18 @@
 <form
     [formGroup]="skillForm"
     class="skill__form">
-  <tui-input
-      formControlName="name"
-      class="skill__input">
-    Введите название
-    <input tuiTextfield type="text" />
-  </tui-input>
+  <div class="tui-form__row skill__input">
+    <tui-input formControlName="name">
+      Введите название
+      <input tuiTextfield/>
+      <span class="tui-required"></span>
+    </tui-input>
+    <tui-error
+        formControlName="name"
+        [error]="[] | tuiFieldError | async"
+    ></tui-error>
+  </div>
+
   <button
       appearance="icon"
       icon="tuiIconTrash"
