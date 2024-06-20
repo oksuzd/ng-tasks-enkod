@@ -1,0 +1,38 @@
+<tui-root>
+  <div class="tui-form__row">
+    <tui-input
+        [(ngModel)]="key"
+        (ngModelChange)="onKeyChange($event)"
+    >
+      Введите ключ
+      <input
+          placeholder="Key"
+          tuiTextfield
+      />
+      <span class="tui-required"></span>
+    </tui-input>
+    <tui-error
+        [(ngModel)]="key"
+        [error]="[] | tuiFieldError | async"
+    ></tui-error>
+  </div>
+
+
+  <div class="tui-form__row">
+    <tui-input
+        [(ngModel)]="value"
+        (ngModelChange)="onValueChange($event)"
+    >
+      Введите значение
+      <input
+          placeholder="Value"
+          tuiTextfield
+      />
+      <span class="tui-required"></span>
+    </tui-input>
+    <tui-error
+        [(ngModel)]="value"
+        [error]="[] | tuiFieldError | async"
+    ></tui-error>
+  </div>
+</tui-root>

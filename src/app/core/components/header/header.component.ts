@@ -26,7 +26,8 @@ export class HeaderComponent implements OnInit {
     this.items = [
       {label: 'Задание 1', routerLink: 'todo-list'},
       {label: 'Задание 2', routerLink: 'cities'},
-      {label: 'Задание 3', routerLink: 'basic-forms'}
+      {label: 'Задание 3', routerLink: 'basic-forms'},
+      {label: 'Задание 4', routerLink: 'advanced-forms'}
     ];
 
     this.router.events
@@ -47,7 +48,7 @@ export class HeaderComponent implements OnInit {
       'cities/create': 'Создать город',
       'cities/edit': 'Редактировать город',
       'basic-forms': 'Создание пользователя',
-
+      'advanced-forms': 'Кастомный контрол'
     };
 
     const currentRoute = this.router.url;
