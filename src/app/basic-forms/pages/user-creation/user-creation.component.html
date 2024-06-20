@@ -1,12 +1,122 @@
-<div [formGroup]="skillsForm">
-  <button tuiButton (click)="addSkill()" [disabled]="skills.length >= 3">Добавить умение</button>
-  <p *ngIf="skills.length > 3" class="error">Желательно не больше 3х умений</p>
-  <div formArrayName="skills">
-    <app-skill-item
-        *ngFor="let skill of skills.controls; let i = index"
-        [skillForm]="skill"
-        (remove)="removeSkill(i)">
-    </app-skill-item>
+<tui-root>
+  <div class="container user-creation">
+    <form class="user-creation__form" [formGroup]="userForm">
+      <div class="tui-row tui-row_sme">
+        <div class="tui-col_5">
+          <h3 class="tui-form__header visually-hidden">Создание пользователя</h3>
+          <div class="tui-form__row">
+            <tui-input
+                formControlName="firstNameValue"
+            >
+              Введите имя
+              <input
+                  placeholder="John"
+                  tuiTextfield
+              />
+              <span class="tui-required"></span>
+            </tui-input>
+            <tui-error
+                formControlName="firstNameValue"
+                [error]="[] | tuiFieldError | async"
+            ></tui-error>
+          </div>
+
+          <div class="tui-form__row">
+            <tui-input
+                formControlName="lastNameValue"
+            >
+              Введите фамилию
+              <input
+                  placeholder="Doe"
+                  tuiTextfield
+              />
+              <span class="tui-required"></span>
+            </tui-input>
+            <tui-error
+                formControlName="lastNameValue"
+                [error]="[] | tuiFieldError | async"
+            ></tui-error>
+          </div>
+
+          <div class="tui-form__row tui-form__row_multi-fields">
+            <div class="tui-form__multi-field">
+              <tui-select
+                  formControlName="languageValue"
+                  [valueContent]="languageValueContent"
+              >
+                Выберите язык интерфейса
+                <tui-data-list-wrapper
+                    *tuiDataList
+                    [items]="languages"
+                ></tui-data-list-wrapper>
+              </tui-select>
+              <ng-template
+                  #languageValueContent
+                  let-data
+              >
+                <div>{{ data }}</div>
+              </ng-template>
+              <tui-error
+                  formControlName="languageValue"
+                  [error]="[] | tuiFieldError | async"
+              ></tui-error>
+            </div>
+          </div>
+
+          <div
+              tuiGroup
+              class="tui-form__row"
+              [adaptive]="true"
+              [collapsed]="true"
+          >
+            <tui-radio-block
+                *ngFor="let user of users"
+                contentAlign="right"
+                formControlName="radioValue"
+                size="l"
+                [hideRadio]="true"
+                [item]="user"
+            >
+              {{ user }}
+            </tui-radio-block>
+          </div>
+
+          <div class="tui-form__buttons">
+            <button
+                appearance="primary"
+                tuiButton
+                type="button"
+                (click)="addSkill()"
+            >
+              Добавить умение
+            </button>
+          </div>
+
+          <ul formArrayName="skills"
+              class="tui-form__row user-creation__skills-list"
+          >
+            <li *ngFor="let skill of skills.controls; let i = index"
+                class="user-creation__skill-item">
+              <app-skill-item
+                  [skillForm]="skill"
+                  (remove)="removeSkill(i)">
+              </app-skill-item>
+            </li>
+          </ul>
+
+          <div class="tui-form__buttons">
+            <button
+                size="l"
+                tuiButton
+                type="submit"
+                (click)="createUser()"
+                [disabled]="skills.length === 0"
+            >
+              Создать
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
   </div>
-  <button tuiButton (click)="createSkills()" [disabled]="skills.length === 0">Создать</button>
-</div>
+</tui-root>

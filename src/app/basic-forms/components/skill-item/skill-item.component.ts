@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormControl, FormGroup } from "@angular/forms";
+
 
 @Component({
   selector: 'app-skill-item',
@@ -10,7 +10,7 @@ export class SkillItemComponent {
   @Input() skillForm: any;
   @Output() remove: EventEmitter<void> = new EventEmitter();
 
-  removeSkill(): void {
+  removeSkill() {
     this.remove.emit();
   }
 }

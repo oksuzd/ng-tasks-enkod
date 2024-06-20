@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 
 @Component({
@@ -8,40 +8,36 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from "@ang
   styleUrls: ['./user-creation.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserCreationComponent implements OnInit {
-  skillsForm!: FormGroup;
+export class UserCreationComponent {
+  languages = ['Русский', 'Английский'];
+  users = ['Пользователь', 'Администратор'];
+  userForm: FormGroup = this.fb.group({
+    firstNameValue: ['', Validators.required],
+    lastNameValue: ['', Validators.required],
+    languageValue: this.languages[0],
+    radioValue: 'user',
+    skills: this.fb.array([])
+  });
 
   constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void {
-    this.initForm();
-  }
-
-  initForm(): void {
-    this.skillsForm = this.fb.group({
-      skills: this.fb.array([])
-    });
-  }
-
   get skills(): FormArray {
-    return this.skillsForm.get('skills') as FormArray;
+    return this.userForm.get('skills') as FormArray;
   }
 
-  addSkill(): void {
+  addSkill() {
     const skillForm = this.fb.group({
       name: ['', Validators.required]
     });
     this.skills.push(skillForm);
   }
 
-  removeSkill(index: number): void {
+  removeSkill(index: number) {
     this.skills.removeAt(index);
   }
 
-  createSkills(): void {
+  createUser() {
     const skills = this.skills.controls.map(control => (control as FormGroup).value.name);
     console.log(skills);
   }
-
-  protected readonly FormGroup = FormGroup;
 }
