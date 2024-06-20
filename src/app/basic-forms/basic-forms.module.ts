@@ -21,7 +21,7 @@ import {
   TuiGroupModule,
   TuiRootModule,
 } from "@taiga-ui/core";
-import { TuiButtonCloseModule } from "@taiga-ui/experimental";
+import { TuiButtonCloseModule, TuiIconModule } from "@taiga-ui/experimental";
 
 
 
@@ -39,6 +39,7 @@ const tuiModules = [
   TuiFieldErrorPipeModule,
   TuiRadioBlockModule,
   TuiButtonCloseModule,
+  TuiIconModule,
 ];
 
 @NgModule({
