@@ -24,6 +24,10 @@ const routes: Routes = [
     path: 'custom-directive',
     loadChildren: () => import('./custom-directive/custom-directive.module').then(m => m.CustomDirectiveModule)
   },
+  {
+    path: 'custom-pipe',
+    loadChildren: () => import('./custom-pipe/custom-pipe.module').then(m => m.CustomPipeModule)
+  },
   {path: '**', component: NotFoundComponent},
 ];
 

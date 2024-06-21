@@ -1,0 +1,36 @@
+<tui-root>
+  <form [formGroup]="phonesForm">
+    <div class="container">
+      <h3 class="visually-hidden">Форматы телефонов</h3>
+      <div class="tui-col_5 telephones">
+        <div class="tui-form__row">
+          <tui-input
+              formControlName="testValue"
+              [tuiTextfieldCleaner]="true"
+          >Введите номер телефона
+            <input
+                placeholder="+78005557778"
+                tuiTextfield
+            />
+          </tui-input>
+        </div>
+        <div class="telephones__wrapper">
+          <span class="telephones__text">Форматированный телефон 1: </span>
+          <span class="telephones__text">
+            {{ phonesForm.valid
+              ? (phonesForm.value.testValue! | phoneNumberFormat:'(###) ###-##-##')
+              : 'Неверный формат номера' }}
+          </span>
+        </div>
+        <div class="telephones__wrapper">
+          <span class="telephones__text">Форматированный телефон 2: </span>
+          <span class="telephones__text">
+            {{ phonesForm.valid
+              ? (phonesForm.value.testValue! | phoneNumberFormat:'###-###-##-##')
+              : 'Неверный формат номера' }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </form>
+</tui-root>

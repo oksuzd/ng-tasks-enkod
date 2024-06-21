@@ -1,0 +1,9 @@
+.telephones {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2.75rem;
+
+  &__text {
+    font-size: 0.9375rem;
+  }
+}

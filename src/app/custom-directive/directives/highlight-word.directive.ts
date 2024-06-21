@@ -3,7 +3,7 @@ import { Directive, ElementRef, Input, OnChanges, Renderer2 } from '@angular/cor
 @Directive({
   selector: '[appHighlightWord]'
 })
-export class HighlightWordDirective implements OnChanges{
+export class HighlightWordDirective implements OnChanges {
   @Input() highlightWord: string = '';
   highlightColor: string = '#FFF4B8';
 
