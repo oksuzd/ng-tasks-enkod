@@ -5,7 +5,7 @@ import { Directive, ElementRef, Input, OnChanges, Renderer2 } from '@angular/cor
 })
 export class HighlightWordDirective implements OnChanges{
   @Input() highlightWord: string = '';
-  highlightColor: string = '#fff4b8';
+  highlightColor: string = '#FFF4B8';
 
   constructor(private el: ElementRef, private renderer: Renderer2) {}
 
