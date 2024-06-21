@@ -1,0 +1,29 @@
+<tui-root>
+  <div class="container searching">
+    <h3 class="searching__header visually-hidden">Поиск по тексту</h3>
+    <form
+        class="b-form"
+        [formGroup]="searchForm"
+    >
+      <div class="tui-form__row">
+        <tui-input
+            formControlName="searchWord"
+            [tuiTextfieldCleaner]="true"
+            tuiTextfieldIconLeft="tuiIconSearchLarge"
+        >Search
+          <input
+              placeholder="Lorem"
+              tuiTextfield
+          />
+        </tui-input>
+      </div>
+      <p class="searching__text"
+         appHighlightWord
+         [highlightWord]="word"
+      >
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab assumenda delectus dolor eveniet maiores nobis
+        quaerat quo velit vero voluptatem? Aliquam at deserunt excepturi id officiis porro quo quos voluptatum?
+      </p>
+    </form>
+  </div>
+</tui-root>

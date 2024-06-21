@@ -49,9 +49,9 @@ const tuiModules = [
   ],
   imports: [
     CommonModule,
+    BasicFormsRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    BasicFormsRoutingModule,
     [...tuiModules],
   ]
 })

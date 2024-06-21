@@ -20,6 +20,10 @@ const routes: Routes = [
     path: 'advanced-forms',
     loadChildren: () => import('./advanced-forms/advanced-forms.module').then(m => m.AdvancedFormsModule)
   },
+  {
+    path: 'custom-directive',
+    loadChildren: () => import('./custom-directive/custom-directive.module').then(m => m.CustomDirectiveModule)
+  },
   {path: '**', component: NotFoundComponent},
 ];
 

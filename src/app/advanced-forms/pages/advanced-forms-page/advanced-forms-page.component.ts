@@ -8,7 +8,6 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 })
 export class AdvancedFormsPageComponent implements OnInit {
   form!: FormGroup;
-  formData: any;
 
   constructor(private fb: FormBuilder) {}
 
