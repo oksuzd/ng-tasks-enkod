@@ -7,7 +7,7 @@ import { TodosService } from "../../state/todos.service";
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 
-@UntilDestroy({checkProperties: true})
+@UntilDestroy()
 @Component({
   selector: 'app-todo-list',
   templateUrl: './todos-page.component.html',

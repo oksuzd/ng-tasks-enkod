@@ -3,7 +3,7 @@ import { City } from "../../models/city.model";
 import { CitiesService } from "../../state/cities.service";
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
-@UntilDestroy({ checkProperties: true })
+@UntilDestroy()
 @Component({
   selector: 'app-cities-page',
   templateUrl: './cities-page.component.html',

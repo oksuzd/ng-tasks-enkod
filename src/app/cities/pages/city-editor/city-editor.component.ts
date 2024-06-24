@@ -4,9 +4,9 @@ import { City } from "../../models/city.model";
 import { ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 import { CitiesService } from "../../state/cities.service";
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 
-@UntilDestroy({checkProperties: true})
+@UntilDestroy()
 @Component({
   selector: 'app-city-editor',
   templateUrl: './city-editor.component.html',
@@ -16,7 +16,6 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 export class CityEditorComponent implements OnInit {
 
   data: Partial<City> = {};
-
   cityForm: FormGroup = this.fb.group({
     id: [''],
     name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(24)]],
@@ -53,18 +52,21 @@ export class CityEditorComponent implements OnInit {
         this.createCity();
       }
     }
-    this.location.back();
   }
 
   private createCity() {
     this.citiesService.addCity(this.cityForm.value)
       .pipe(untilDestroyed(this))
-      .subscribe();
+      .subscribe(() => {
+        this.location.back();
+      });
   }
 
   private editCity() {
     this.citiesService.updateCity(this.cityForm.value)
       .pipe(untilDestroyed(this))
-      .subscribe();
+      .subscribe(() => {
+        this.location.back();
+      });
   }
 }

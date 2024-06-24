@@ -6,7 +6,7 @@ import { Router } from "@angular/router";
 import { CitiesService } from "../../state/cities.service";
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
-@UntilDestroy({checkProperties: true})
+@UntilDestroy()
 @Component({
   selector: 'app-city-card',
   templateUrl: './city-card.component.html',
