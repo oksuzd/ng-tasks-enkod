@@ -4,7 +4,7 @@ import { Todo } from "../../models/todo.model";
 import { initialFilters, TodoFilter, VISIBILITY_FILTER } from "../../models/filter.model";
 import { TodosQuery } from "../../state/todos.query";
 import { TodosService } from "../../state/todos.service";
-import { UntilDestroy } from '@ngneat/until-destroy';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 
 @UntilDestroy({checkProperties: true})
@@ -32,7 +32,9 @@ export class TodosPageComponent implements OnInit {
   }
 
   createSubscription() {
-    this.todosQuery.selectVisibilityFilter$.subscribe(val => this.activeFilter = val);
+    this.todosQuery.selectVisibilityFilter$
+      .pipe(untilDestroyed(this))
+      .subscribe(val => this.activeFilter = val);
   }
 
 

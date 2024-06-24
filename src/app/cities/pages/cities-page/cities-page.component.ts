@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { City } from "../../models/city.model";
 import { CitiesService } from "../../state/cities.service";
-import { UntilDestroy} from '@ngneat/until-destroy';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -26,10 +26,14 @@ export class CitiesPageComponent implements OnInit {
   }
 
   private createNewCity(city: City) {
-    this.citiesService.addCity(city).subscribe();
+    this.citiesService.addCity(city)
+      .pipe(untilDestroyed(this))
+      .subscribe();
   }
 
   private loadCities() {
-    this.citiesService.getCities().subscribe();
+    this.citiesService.getCities()
+      .pipe(untilDestroyed(this))
+      .subscribe();
   }
 }

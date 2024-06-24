@@ -4,9 +4,9 @@ import { City } from "../../models/city.model";
 import { ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 import { CitiesService } from "../../state/cities.service";
-import { UntilDestroy} from '@ngneat/until-destroy';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
-@UntilDestroy({ checkProperties: true })
+@UntilDestroy({checkProperties: true})
 @Component({
   selector: 'app-city-editor',
   templateUrl: './city-editor.component.html',
@@ -39,8 +39,8 @@ export class CityEditorComponent implements OnInit {
     const itemId = this.route.snapshot.params['id'];
     if (itemId) {
       this.data = this.citiesService.getCityById(itemId)!;
-      const { id, name, description, image, favorite } = this.data;
-      this.cityForm.patchValue({ id, name, description, image, favorite });
+      const {id, name, description, image, favorite} = this.data;
+      this.cityForm.patchValue({id, name, description, image, favorite});
       this.cdr.detectChanges();
     }
   }
@@ -57,10 +57,14 @@ export class CityEditorComponent implements OnInit {
   }
 
   private createCity() {
-    this.citiesService.addCity(this.cityForm.value).subscribe();
+    this.citiesService.addCity(this.cityForm.value)
+      .pipe(untilDestroyed(this))
+      .subscribe();
   }
 
   private editCity() {
-    this.citiesService.updateCity(this.cityForm.value).subscribe();
+    this.citiesService.updateCity(this.cityForm.value)
+      .pipe(untilDestroyed(this))
+      .subscribe();
   }
 }

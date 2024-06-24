@@ -4,9 +4,9 @@ import { catchError, throwError } from "rxjs";
 import { ConfirmationService } from "primeng/api";
 import { Router } from "@angular/router";
 import { CitiesService } from "../../state/cities.service";
-import { UntilDestroy} from '@ngneat/until-destroy';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
-@UntilDestroy({ checkProperties: true })
+@UntilDestroy({checkProperties: true})
 @Component({
   selector: 'app-city-card',
   templateUrl: './city-card.component.html',
@@ -33,10 +33,12 @@ export class CityCardComponent {
     this.citiesService.updateCity(updatedCity)
       .pipe(
         catchError((err) => throwError(() => {
-          this.city = {...this.city, favorite: this.city.favorite};
-          return err;
-        }))
-      )
+              this.city = {...this.city, favorite: this.city.favorite};
+              return err;
+            }
+          )
+        ),
+        untilDestroyed(this))
       .subscribe(() => {
         this.city = updatedCity;
       });
@@ -49,7 +51,9 @@ export class CityCardComponent {
       acceptLabel: 'Да',
       rejectLabel: 'Нет',
       accept: () => {
-        this.citiesService.deleteCity(this.city.id).subscribe();
+        this.citiesService.deleteCity(this.city.id)
+          .pipe(untilDestroyed(this))
+          .subscribe();
       }
     });
   }

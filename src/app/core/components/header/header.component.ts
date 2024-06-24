@@ -2,9 +2,9 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@
 import { NavigationEnd, Router } from "@angular/router";
 import { filter } from "rxjs";
 import { MenuItem } from "primeng/api";
-import { UntilDestroy} from '@ngneat/until-destroy';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
-@UntilDestroy({ checkProperties: true })
+@UntilDestroy()
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -34,7 +34,8 @@ export class HeaderComponent implements OnInit {
 
     this.router.events
       .pipe(
-        filter(event => event instanceof NavigationEnd)
+        filter(event => event instanceof NavigationEnd),
+        untilDestroyed(this)
       )
       .subscribe(() => {
         this.updateTitle();
